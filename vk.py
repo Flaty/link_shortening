@@ -35,7 +35,7 @@ def shorten_link(token, url):
     response_data = response.json()
     if 'response' in response_data:
         short_link = response_data['response']['short_url']
-        return print(short_link)
+        return short_link
     else:
         raise requests.exceptions.HTTPError
 
@@ -56,7 +56,7 @@ def count_clicks(token, link):
     response_data = response.json()
     if 'response' in response_data:
         stats_link = response_data['response']['stats'][0]['views']
-        return print(stats_link)
+        return stats_link
     else:
         raise requests.exceptions.HTTPError
 
@@ -70,8 +70,8 @@ if __name__ == "__main__":
     user_input = input('Введите свою ссылку для сокращения: ')
     try:
         if is_shorten_link(vk_token, user_input):
-            count_clicks(vk_token, user_input)
+            print(count_clicks(vk_token, user_input))
         else:
-            shorten_link(vk_token, user_input)
+            print(shorten_link(vk_token, user_input))
     except requests.exceptions.HTTPError:
         print('Вы ввели неправильную ссылку')
